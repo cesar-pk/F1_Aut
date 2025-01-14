@@ -113,7 +113,20 @@ Resumo do que preciso fazer:
 
 É preciso adicionar linha de código do launch no arquivo setup.py do pacote, pra que o ROS reconheça que existem arquivos de launch. Também é preciso tomar cuidado com o nome dos arquivos na pasta install da sua workspace, o executável que o launch busca é o que está na pasta install. 
 
-`(os.path.join('share', package_name, "launch"), glob('launch/*')), #pegando todos os arquivos de launch.`
+```
+package_name = 'lab1_pkg'
+
+setup(
+    name=package_name,
+    version='0.0.0',
+    packages=find_packages(exclude=['test']),
+    data_files=[
+        ('share/ament_index/resource_index/packages',
+            ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+        (os.path.join('share', package_name, "launch"), glob('launch/*')), #pegando todos os arquivos de launch. ADICIONAR ESSA LINHA
+    ],
+```
 
 o launch utilizado 
 
