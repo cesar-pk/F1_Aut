@@ -8,9 +8,9 @@
 
 1. Inicializar o ROS:
 
-`source /opt/ros/foxy/setup.bash
+`source /opt/ros/foxy/setup.bash`
 
-`. install/setup.bash
+`. install/setup.bash`
 
 2. Criar pasta do workspace
 
@@ -20,11 +20,11 @@ mkdir -p ~/ros2_ws/src
 O comando `-p` é utilizado para criar a pasta e a subpasta
 
   
-3. Comando `build
+3. Comando `build`
 
 é como se fosse a inicialização do pacote, sempre que houver alguma atualização em algum dos arquivos precisa utilizar o comando. Sempre que executado, esse comando cria as pastas build, install e log.
 
-`colcon build
+`colcon build`
 
 **CRIAÇÃO DO PACOTE**
 
@@ -40,7 +40,7 @@ Comandos para python e c++
 
 
 INICIALIZAÇÃO DO AMBIENTE DO PACOTE
-`source install/setup.bash
+`source install/setup.bash`
 
 https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html
 
@@ -51,7 +51,7 @@ https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Colcon-Tutoria
 
 Comandos gerais
 
-`rqt 
+`rqt`
 
 é um pacote para gerenciamento de informações do ROS 
 
@@ -132,8 +132,8 @@ _________________
 
 comandos: 
 
-ros2 run lab1_pkg talker
-ros2 run lab1_pkg listener 
+`ros2 run lab1_pkg talker`
+`ros2 run lab1_pkg listener` 
 
 
 nome do pacote: 
