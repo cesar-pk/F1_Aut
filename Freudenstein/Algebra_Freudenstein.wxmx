@@ -1,0 +1,71 @@
+
+-->	kill ( all ) ;
+
+1 Técnica de Freudenstein
+
+-->	eq1 : l2 · cos ( alpha ) = l0 − l1 · cos ( theta ) + l3 · cos ( phi ) ;
+eq2 : l2 · sin ( alpha ) = − l1 · sin ( theta ) + l3 · sin ( phi ) ;
+
+soma das equações ao quadrado:
+-->	eq3 : eq1 ^ 2 + eq2 ^ 2 ;
+
+-->	expand ( eq3 ) ;
+
+-->	eqt : trigsimp ( eq3 ) ;
+eqt : expand ( % ) ;
+
+-->	dir : rhs ( eqt ) $
+esq : lhs ( eqt ) $
+eqr : dir − esq ;
+
+1.1 Verificação das expressões
+
+Nesse trecho, vou verificar se a expressão obtida é equivalente ao apresentado no material de referencia. Primeiro é feita a coleta os coefiecientes k1 e k2, solicitando os termos que estão multiplicando sin(phi) e cos(phi) respectivamente. O k3 é o que sobra da expressão original, basta mutiplicar k1 por sin(phi), somar com k2 cos(phi). Essa nova expressão é subtraída da equação geral (eqr), o resultado é o k3.
+
+-->	k1t : coeff ( eqr , sin ( phi ) ) ;
+k2t : coeff ( eqr , cos ( phi ) ) ;
+k3t : ratsimp ( eqr − ( ( k1t · sin ( phi ) ) + k2t · cos ( phi ) ) ) ;
+
+Eqteste que aparece abaixo é apenas copiada do material, vou comparar com o que foi obtido na eqr.
+-->	eqteste : l0 ^ 2 + l1 ^ 2 + l3 ^ 2 − l2 ^ 2 − 2 · l0 · l1 · cos ( theta ) + 2 · l3 · ( l0 − l1 · cos ( theta ) ) · cos ( phi ) − 2 · l1 · l3 · sin ( theta ) · sin ( phi ) ;
+
+-->	ratsimp ( eqr − eqteste ) ;
+
+1.2 Substituição de Weierstrass
+
+Define as relações da formula tangente de meio angulo:
+-->	seno : 2 · t / ( 1 + t ^ 2 ) $
+coseno : ( 1 − t ^ 2 ) / ( 1 + t ^ 2 ) $
+
+Declara a Equação 4 em função dos k's simbolicos.
+-->	eq4 : k1 · sin ( phi ) + k2 · cos ( phi ) + k3 ;
+
+Substitui as relações da formula tangente na equação 4 e simplifica em função de t:
+-->	eq4 : subst ( seno , sin ( phi ) , eq4 ) $
+eq4 : subst ( coseno , cos ( phi ) , eq4 ) $
+ratsimp ( eq4 ) ;
+r1 : solve ( [ eq4 ] , [ t ] ) ;
+ 
+
+-->	r2 : r1 [ 1 ] ;
+ 
+-->	r3t : subst ( tan ( phi / 2 ) , t , r2 ) ;
+ 
+-->	r3 : subst ( tan ( phi / 2 ) , t , r1 ) ;
+ 
+-->	ptheta : ratsimp ( solve ( [ r3 ] , [ phi ] ) ) ;
+
+-->	ptheta [ 1 ] ;
+
+-->	confe : 2 · atan ( ( − k1 + sqrt ( k1 ^ 2 + k2 ^ 2 − k3 ^ 2 ) ) / ( k3 − k2 ) ) ;
+
+-->	confe − ptheta ;
+
+-->	ratsimp ( % ) ;
+
+-->	atheta : eq2 / eq1 ;
+mani : subst ( tan ( alpha ) , sin ( alpha ) / cos ( alpha ) , atheta ) ;
+solve ( [ mani ] , [ alpha ] ) $
+ 
+-->	eq1 · t ;
+
